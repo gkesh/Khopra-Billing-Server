@@ -18,10 +18,10 @@ public class RecieptFormat {
         PageFormat pf = pj.defaultPage();
         Paper paper = pf.getPaper();    
 
-        double middleHeight =8.0;  
+        double middleHeight = 20.0;  
         double headerHeight = 2.0;                  
-        double footerHeight = 2.0;                  
-        double width = convert_CM_To_PPI(8);      //printer know only point per inch.default value is 72ppi
+        double footerHeight = 4.0;                  
+        double width = convert_CM_To_PPI(5.7);      //printer know only point per inch.default value is 72ppi
         double height = convert_CM_To_PPI(headerHeight+middleHeight+footerHeight); 
         paper.setSize(width, height);
         paper.setImageableArea(                    

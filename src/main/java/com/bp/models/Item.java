@@ -21,7 +21,7 @@ public class Item {
         this.amount = amount;
         this.quantity = quantity;
     }
-
+    
     public int getId() {
         return id;
     }
@@ -31,6 +31,8 @@ public class Item {
     }
     
     public String getName() {
+        while (name.length() < 14)
+            name += " ";
         return name;
     }
 

@@ -16,7 +16,7 @@ import java.util.List;
 public class Order {
     private List<Item> items;
     private final Timestamp time;
-    private String user;
+    private String user, customer;
     
     public Order(List<Item> items, Timestamp time, String user) {
         this.items = new ArrayList<>();
@@ -30,8 +30,6 @@ public class Order {
         items = new ArrayList<>();
     }
     
-    
-
     public List<Item> getItems() {
         return items;
     }
@@ -55,5 +53,12 @@ public class Order {
     public void setUser(String user) {
         this.user = user;
     }
-    
+
+    public String getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(String customer) {
+        this.customer = customer;
+    }
 }
