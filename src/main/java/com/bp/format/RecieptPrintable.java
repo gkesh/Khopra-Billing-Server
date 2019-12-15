@@ -44,12 +44,12 @@ public class RecieptPrintable implements Printable{
                 
                 try{
                     int y = 20;
-                    int x = 15;
+                    int x = 10;
                     int yShift = 20;
                     int headerRectHeight = 30;
                     double sum = 0;
                     
-                    g2d.setFont(new Font("Monospaced",Font.PLAIN,9));
+                    g2d.setFont(new Font("Monospaced",Font.BOLD,9));
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
                     g2d.drawString("|Khopra Community Lodge|",x,y);y+=yShift;
                     g2d.drawString("|----------------------|",x,y);
