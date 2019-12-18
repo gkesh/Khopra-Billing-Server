@@ -44,10 +44,10 @@ public class RecieptPrintable implements Printable{
                 
                 try{
                     int y = 20;
-                    int x = 10;
+                    int x = 13;
                     int yShift = 20;
                     int headerRectHeight = 30;
-                    double sum = 0;
+                    int sum = 0;
                     
                     g2d.setFont(new Font("Monospaced",Font.BOLD,9));
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
@@ -59,7 +59,7 @@ public class RecieptPrintable implements Printable{
                             user = pad("|User: " + order.getUser());
                     g2d.drawString(customer,x, y);y+=yShift;
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
-                    g2d.drawString("|Food Name      Q.  Amt|",x,y);y+=yShift;
+                    g2d.drawString("|Items          Q.  Amt|",x,y);y+=yShift;
                     g2d.drawString("|----------------------|",x,y);
                     y+=headerRectHeight;
                     for (Item item : order.getItems()) {
@@ -78,8 +78,15 @@ public class RecieptPrintable implements Printable{
                         sum += item.getAmount()*item.getQuantity();
                     }
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
-                    String total = pad("|Total amount: " + (int) sum);
-                    g2d.drawString(total ,x,y);y+=yShift;
+                    g2d.drawString(pad("|Subtotal: Rs." + sum) ,x,y);
+                    y+=yShift;
+                    double taxAmt = sum * 0.1;
+                    String tax = pad("|SC (10%)" + String.format(": Rs.%.2f", 
+                            taxAmt));
+                    g2d.drawString(tax, x, y); y+=yShift;
+                    g2d.drawString("|----------------------|",x,y);y+=yShift;
+                    g2d.drawString(pad(String.format("|Total: Rs.%.2f", 
+                            (sum + taxAmt))), x, y); y+=yShift;
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
                     g2d.drawString(user, x, y);y+=yShift;
                     g2d.drawString("|**********************|",x,y);y+=yShift;
