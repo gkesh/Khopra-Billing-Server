@@ -20,7 +20,7 @@ import org.json.JSONObject;
  * @author Admin
  */
 public class LocalBackup {
-    public static final String JSON_FILE = "/home/pi/lodge/backup.json";
+    public static final String JSON_FILE = "backup.json";
     
     public LocalBackup() {
         initBackup();

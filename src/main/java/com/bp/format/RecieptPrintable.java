@@ -47,16 +47,19 @@ public class RecieptPrintable implements Printable{
                     int x = 13;
                     int yShift = 20;
                     int headerRectHeight = 30;
-                    int sum = 0;
+                    double sum = 0;
                     
                     g2d.setFont(new Font("Monospaced",Font.BOLD,9));
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
                     g2d.drawString("|Khopra Community Lodge|",x,y);y+=yShift;
-                    g2d.drawString("|----------------------|",x,y);
-                    y+=headerRectHeight;
+                    g2d.drawString("|    Paudwar, Myagdi   |", x, y);y+=yShift;
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
-                    String customer = pad("|Cust: " + order.getCustomer()),
-                            user = pad("|User: " + order.getUser());
+                    g2d.drawString("|Date: " + 
+                            new SimpleDateFormat("yyyy-MM-dd HH:mm")
+                            .format(new Date()) +"|", x, y);y+=yShift;
+                    g2d.drawString("|----------------------|",x,y);y+=yShift;
+                    String customer = pad("|Cust: " + order.getCustomer(), "|"),
+                            user = pad("|User: " + order.getUser(), "|");
                     g2d.drawString(customer,x, y);y+=yShift;
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
                     g2d.drawString("|Items          Q.  Amt|",x,y);y+=yShift;
@@ -78,24 +81,21 @@ public class RecieptPrintable implements Printable{
                         sum += item.getAmount()*item.getQuantity();
                     }
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
-                    g2d.drawString(pad("|Subtotal: Rs." + sum) ,x,y);
+                    g2d.drawString(pad("|Subtotal: ", "Rs." + String
+                            .format("%.2f", sum) + "|") ,x,y);
                     y+=yShift;
                     double taxAmt = sum * 0.1;
-                    String tax = pad("|SC (10%)" + String.format(": Rs.%.2f", 
-                            taxAmt));
+                    String tax = pad("|SC (10%): ", String.format("Rs.%.2f", 
+                            taxAmt) + "|");
                     g2d.drawString(tax, x, y); y+=yShift;
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
-                    g2d.drawString(pad(String.format("|Total: Rs.%.2f", 
-                            (sum + taxAmt))), x, y); y+=yShift;
+                    g2d.drawString(pad("|Total: ", String.format("Rs.%.2f", 
+                            (sum + taxAmt)) + "|"), x, y); y+=yShift;
                     g2d.drawString("|----------------------|",x,y);y+=yShift;
                     g2d.drawString(user, x, y);y+=yShift;
                     g2d.drawString("|**********************|",x,y);y+=yShift;
-                    g2d.drawString("|THANKS FOR YOUR VISIT |",x,y);y+=yShift;
+                    g2d.drawString("|THANK YOU FOR THE STAY|",x,y);y+=yShift;
                     g2d.drawString("|**********************|",x,y);y+=yShift;
-                    g2d.drawString("|Date: " + 
-                            new SimpleDateFormat("yyyy-MM-dd HH:mm")
-                            .format(new Date()) +"|", x, y);y+=yShift;
-                    g2d.drawString("|----------------------|",x,y);y+=yShift;
                     g2d.drawString("|                      |",x,y);y+=yShift;
                     g2d.drawString("|                      |",x,y);y+=yShift;
                 }
@@ -107,11 +107,10 @@ public class RecieptPrintable implements Printable{
             return result;
     }
     
-    private String pad(String str) {
-        while (str.length() < 23) {
-            str += " ";
+    private String pad(String head, String tail) {
+        while (head.length() < (24 - tail.length())) {
+            head += " ";
         } 
-        return str + "|";
+        return head + tail;
     }
-    
 }
