@@ -1,5 +1,8 @@
-# BillPrinterAPI
-Java application to print bills based on the given order JSON  data
+# Bill Print Server
+Java application to print bills based on the given order JSON  data.
+
+This application was used as the backend server for the khopra web application which serves as a KOT/Digital Menu app.
+This is an older build of the khopra server and is now replaced by a Spring boot server using groovy and GraphQL.
 
 Opens a serversocket to recieve json data and print it using a connected printer.
 
